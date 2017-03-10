@@ -1,0 +1,4 @@
+
+
+FILES
+spartan3a_bram_1024x32.ngc,virtex5_bram_1024x32.ngc,spartan3a_fifo_1024x10.ngc,virtex5_fifo_1024x10.ngc 

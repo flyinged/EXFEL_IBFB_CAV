@@ -1,0 +1,8 @@
+##############################################################################
+## Filename:          clock_v2_1_0.pao
+## Description:       Peripheral Analysis Order
+## Date:              Fri Jan 23 10:54:12 2009 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+lib clock_v1_00_a fpga_technology_package_virtex5 vhdl
+lib clock_v1_00_a clock vhdl

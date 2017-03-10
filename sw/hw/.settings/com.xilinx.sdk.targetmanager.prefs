@@ -1,0 +1,3 @@
+#Fri Jan 31 15:17:17 CET 2014
+eclipse.preferences.version=1
+jtag.settings=\ -configdevice devicenr 1 partname unknown irlength 0 idcode 0x0 -configdevice devicenr 2 partname unknown irlength 0 idcode 0x0 -configdevice devicenr 3 partname unknown irlength 0 idcode 0x0 -configdevice devicenr 4 partname unknown irlength 0 idcode 0x0 -configdevice devicenr 5 partname unknown irlength 0 idcode 0x0 -configdevice devicenr 6 partname unknown irlength 0 idcode 0x0 -configdevice devicenr 7 partname unknown irlength 0 idcode 0x0 -debugdevice deviceNr 5

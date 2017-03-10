@@ -1,0 +1,12 @@
+##############################################################################
+## Filename:          ./plb46_to_iic_mmap_v2_1_0.pao
+## Description:       Peripheral Analysis Order
+## Date:              Wed Aug 22 16:59:06 2012 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+lib proc_common_v3_00_a  all 
+lib plbv46_slave_burst_v1_01_a  all 
+lib plb46_to_iic_mmap_v1_00_a user_logic vhdl
+lib plb46_to_iic_mmap_v1_00_a plb46_to_iic_mmap vhdl
+lib plb46_to_iic_mmap_v1_00_a mmap_package vhdl
+lib plb46_to_iic_mmap_v1_00_a i2c_link vhdl

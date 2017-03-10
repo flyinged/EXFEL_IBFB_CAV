@@ -1,0 +1,493 @@
+############################################################################
+##                       Paul Scherrer Institute (PSI)
+############################################################################
+## Unit    : system.ucf
+## Author  : Goran Marinkovic, Section Diagnostic
+## Version : $Revision: 1.4 $
+############################################################################
+## Copyright© PSI, Section Diagnostic
+############################################################################
+## Comment : Constraints file targetted to xc5vfx70T-ff1136 BPM_FPGA
+############################################################################
+############################################################################
+## Chip constraints
+############################################################################
+CONFIG STEPPING="0";
+############################################################################
+## Clock constraints
+############################################################################
+NET CLK_BPM_125_INT_P TNM_NET = CLK_BPM_125_INT_P;
+TIMESPEC TS_CLK_BPM_125_INT_P = PERIOD CLK_BPM_125_INT_P 8 ns HIGH 50 %;
+
+NET CLK_BPM_200_IDL_P TNM_NET = CLK_BPM_200_IDL_P;
+TIMESPEC TS_CLK_BPM_200_IDL_P = PERIOD CLK_BPM_200_IDL_P 5 ns HIGH 50 %;
+
+NET CLK_BPM_250_INT_P TNM_NET = CLK_BPM_250_INT_P;
+TIMESPEC TS_CLK_BPM_250_INT_P = PERIOD CLK_BPM_250_INT_P 4 ns HIGH 50 %;
+
+#ML84: added. TCL script was not working in this project.
+NET "gpac_plbovergtx_inst/gpac_plbovergtx_inst/o_mgt_rx<0>_RXRECCLK" TNM_NET = PLBOVERGTX_RXCLK0;
+TIMESPEC TS_PLBOVERGTX_RXCLK0 = PERIOD "PLBOVERGTX_RXCLK0" 4 ns HIGH 50%;
+
+#Created by Constraints Editor (xc5vfx70t-ff1136-2) - 2016/08/22
+#NET "gpac_plbovergtx_inst/gpac_plbovergtx_inst/o_mgt_rx<0>_RXRECCLK" TNM_NET = gpac_plbovergtx_inst/gpac_plbovergtx_inst/o_mgt_rx<0>_RXRECCLK;
+#>DISABLED<#TIMESPEC TS_gpac_plbovergtx_inst_gpac_plbovergtx_inst_o_mgt_rx_0__RXRECCLK = PERIOD "gpac_plbovergtx_inst/gpac_plbovergtx_inst/o_mgt_rx<0>_RXRECCLK" 4 ns HIGH 50%;
+
+############################################################################
+## System interface
+############################################################################
+NET CLK_BPM_125_INT_P             IOSTANDARD = LVDS_25;
+NET CLK_BPM_125_INT_N             IOSTANDARD = LVDS_25;
+NET CLK_BPM_125_INT_P             LOC = H17;
+NET CLK_BPM_125_INT_N             LOC = H18;
+
+NET CLK_BPM_200_IDL_P             IOSTANDARD = LVDS_25;
+NET CLK_BPM_200_IDL_N             IOSTANDARD = LVDS_25;
+NET CLK_BPM_200_IDL_P             LOC = K17;
+NET CLK_BPM_200_IDL_N             LOC = L18;
+
+NET CLK_BPM_250_INT_P             IOSTANDARD = LVDS_25;
+NET CLK_BPM_250_INT_N             IOSTANDARD = LVDS_25;
+NET CLK_BPM_250_INT_P             LOC = G15;
+NET CLK_BPM_250_INT_N             LOC = G16;
+############################################################################
+## LED interface
+############################################################################
+NET BPM_FP_LED(*)                 IOSTANDARD = LVCMOS18;
+NET BPM_FP_LED(0)                 LOC = D12;                               # BPM1 row B LED1 red   / BPM2 row C LED1 red
+NET BPM_FP_LED(1)                 LOC = C12;                               # BPM1 row B LED1 green / BPM2 row C LED1 green
+NET BPM_FP_LED(2)                 LOC = A13;                               # BPM1 row B LED2 red   / BPM2 row C LED2 red
+NET BPM_FP_LED(3)                 LOC = B12;                               # BPM1 row B LED2 green / BPM2 row C LED2 green
+############################################################################
+## Jumper interface
+############################################################################
+NET BPM_JMP(*)                    IOSTANDARD = LVCMOS18 | DRIVE = 8;
+NET BPM_JMP(0)                    LOC = B13;
+NET BPM_JMP(1)                    LOC = C13;
+NET BPM_JMP(2)                    LOC = F13;
+NET BPM_JMP(3)                    LOC = G13;
+############################################################################
+## UART interface
+############################################################################
+NET BPM_CFG_COM_0_UART_TX         IOSTANDARD = LVCMOS25 | DRIVE = 8 | SLEW = FAST;
+NET BPM_CFG_COM_1_UART_RX         IOSTANDARD = LVCMOS25;
+NET BPM_CFG_COM_0_UART_TX         LOC = AK33;
+NET BPM_CFG_COM_1_UART_RX         LOC = AK34;
+
+NET BPM_CFG_COM_2_DEV_READY       IOSTANDARD = LVCMOS25 | PULLUP;
+NET BPM_CFG_COM_3_DEV_READY       IOSTANDARD = LVCMOS25 | PULLUP;
+NET BPM_CFG_COM_2_DEV_READY       LOC = AK32;                              # 1 = DEV_READY RFFE 1 for BPM1_FPGA / 1 = DEV_READY RFFE 3 for BPM2_FPGA
+NET BPM_CFG_COM_3_DEV_READY       LOC = AJ32;                              # 1 = DEV_READY RFFE 2 for BPM1_FPGA / 1 = DEV_READY RFFE 4 for BPM2_FPGA
+
+NET BPM_CFG_COM_4_GA              IOSTANDARD = LVCMOS25;
+NET BPM_CFG_COM_4_GA              LOC = J15;                               # 0 = BPM1_FPGA / 1 = BPM2_FPGA
+############################################################################
+## PB FPGA to BPM FPGA interface
+############################################################################
+NET FL_CLK_P                      IOSTANDARD = LVDS_25;
+NET FL_CLK_N                      IOSTANDARD = LVDS_25;
+NET FL_IDLE_P                     IOSTANDARD = LVDS_25;
+NET FL_IDLE_N                     IOSTANDARD = LVDS_25;
+NET FL_SDO_P                      IOSTANDARD = LVDS_25;
+NET FL_SDO_N                      IOSTANDARD = LVDS_25;
+NET FL_SDI_P                      IOSTANDARD = LVDS_25;
+NET FL_SDI_N                      IOSTANDARD = LVDS_25;
+NET FL_CLK_P                      LOC = AN32;
+NET FL_CLK_N                      LOC = AP32;
+NET FL_IDLE_P                     LOC = AM33;
+NET FL_IDLE_N                     LOC = AM32;
+NET FL_SDO_P                      LOC = AN34;
+NET FL_SDO_N                      LOC = AN33;
+NET FL_SDI_P                      LOC = AL34;
+NET FL_SDI_N                      LOC = AL33;
+############################################################################
+## ADC trigger BP_FPGA interface
+############################################################################
+NET ADC_TRIG_BP_P                 IOSTANDARD = LVDS_25;
+NET ADC_TRIG_BP_N                 IOSTANDARD = LVDS_25;
+NET ADC_TRIG_BP_P                 LOC = AL15;
+NET ADC_TRIG_BP_N                 LOC = AL14;
+############################################################################
+## ADC PB to BPM FPGA interface
+############################################################################
+NET ADC_HCK_P TNM_NET = ADC_HCK_P;
+TIMESPEC TS_ADC_HCK_P = PERIOD ADC_HCK_P 6.00 ns HIGH 50 %;
+
+NET ADC_HCK_P                     IOSTANDARD = LVDS_25;
+NET ADC_HCK_N                     IOSTANDARD = LVDS_25;
+NET ADC_HCK_P                     LOC = AH12;
+NET ADC_HCK_N                     LOC = AG13;
+
+NET ADC_TRIG_PB_P                 IOSTANDARD = LVDS_25;
+NET ADC_TRIG_PB_N                 IOSTANDARD = LVDS_25;
+NET ADC_TRIG_PB_P                 LOC = AN14;
+NET ADC_TRIG_PB_N                 LOC = AP14;
+
+NET ADC_0_CK_P                    IOSTANDARD = LVDS_25;
+NET ADC_0_CK_N                    IOSTANDARD = LVDS_25;
+NET ADC_0_D_P(*)                  IOSTANDARD = LVDS_25;
+NET ADC_0_D_N(*)                  IOSTANDARD = LVDS_25;
+NET ADC_0_CK_P                    LOC = AG5;
+NET ADC_0_CK_N                    LOC = AF5;
+NET ADC_0_D_P(0)                  LOC = W6;
+NET ADC_0_D_P(1)                  LOC = W7;
+NET ADC_0_D_P(2)                  LOC = AA5;
+NET ADC_0_D_P(3)                  LOC = V8;
+NET ADC_0_D_P(4)                  LOC = AC4;
+NET ADC_0_D_P(5)                  LOC = AA6;
+NET ADC_0_D_P(6)                  LOC = AD4;
+NET ADC_0_D_P(7)                  LOC = AB6;
+NET ADC_0_D_P(8)                  LOC = AD6;
+NET ADC_0_D_P(9)                  LOC = AE8;
+NET ADC_0_D_P(10)                 LOC = AC7;
+NET ADC_0_D_P(11)                 LOC = AE7;
+NET ADC_0_D_P(12)                 LOC = AH7;
+NET ADC_0_D_P(13)                 LOC = AJ7;
+NET ADC_0_D_P(14)                 LOC = AH5;
+NET ADC_0_D_P(15)                 LOC = AK7;
+NET ADC_0_D_N(0)                  LOC = Y6;
+NET ADC_0_D_N(1)                  LOC = V7;
+NET ADC_0_D_N(2)                  LOC = AB5;
+NET ADC_0_D_N(3)                  LOC = U8;
+NET ADC_0_D_N(4)                  LOC = AC5;
+NET ADC_0_D_N(5)                  LOC = Y7;
+NET ADC_0_D_N(6)                  LOC = AD5;
+NET ADC_0_D_N(7)                  LOC = AB7;
+NET ADC_0_D_N(8)                  LOC = AE6;
+NET ADC_0_D_N(9)                  LOC = AD9;
+NET ADC_0_D_N(10)                 LOC = AD7;
+NET ADC_0_D_N(11)                 LOC = AF6;
+NET ADC_0_D_N(12)                 LOC = AG7;
+NET ADC_0_D_N(13)                 LOC = AJ6;
+NET ADC_0_D_N(14)                 LOC = AG6;
+NET ADC_0_D_N(15)                 LOC = AK6;
+
+NET ADC_1_CK_P                    IOSTANDARD = LVDS_25;
+NET ADC_1_CK_N                    IOSTANDARD = LVDS_25;
+NET ADC_1_D_P(*)                  IOSTANDARD = LVDS_25;
+NET ADC_1_D_N(*)                  IOSTANDARD = LVDS_25;
+NET ADC_1_CK_P                    LOC = AL11;
+NET ADC_1_CK_N                    LOC = AL10;
+NET ADC_1_D_P(0)                  LOC = W10;
+NET ADC_1_D_P(1)                  LOC = V10;
+NET ADC_1_D_P(2)                  LOC = Y8;
+NET ADC_1_D_P(3)                  LOC = Y11;
+NET ADC_1_D_P(4)                  LOC = AA8;
+NET ADC_1_D_P(5)                  LOC = AB10;
+NET ADC_1_D_P(6)                  LOC = AC8;
+NET ADC_1_D_P(7)                  LOC = AC10;
+NET ADC_1_D_P(8)                  LOC = AF9;
+NET ADC_1_D_P(9)                  LOC = AD10;
+NET ADC_1_D_P(10)                 LOC = AF8;
+NET ADC_1_D_P(11)                 LOC = AG10;
+NET ADC_1_D_P(12)                 LOC = AG8;
+NET ADC_1_D_P(13)                 LOC = AJ9;
+NET ADC_1_D_P(14)                 LOC = AK8;
+NET ADC_1_D_P(15)                 LOC = AH9;
+NET ADC_1_D_N(0)                  LOC = W9;
+NET ADC_1_D_N(1)                  LOC = V9;
+NET ADC_1_D_N(2)                  LOC = Y9;
+NET ADC_1_D_N(3)                  LOC = W11;
+NET ADC_1_D_N(4)                  LOC = AA9;
+NET ADC_1_D_N(5)                  LOC = AA10;
+NET ADC_1_D_N(6)                  LOC = AB8;
+NET ADC_1_D_N(7)                  LOC = AC9;
+NET ADC_1_D_N(8)                  LOC = AF10;
+NET ADC_1_D_N(9)                  LOC = AD11;
+NET ADC_1_D_N(10)                 LOC = AE9;
+NET ADC_1_D_N(11)                 LOC = AG11;
+NET ADC_1_D_N(12)                 LOC = AH8;
+NET ADC_1_D_N(13)                 LOC = AJ10;
+NET ADC_1_D_N(14)                 LOC = AK9;
+NET ADC_1_D_N(15)                 LOC = AH10;
+
+NET ADC_2_CK_P                    IOSTANDARD = LVDS_25;
+NET ADC_2_CK_N                    IOSTANDARD = LVDS_25;
+NET ADC_2_D_P(*)                  IOSTANDARD = LVDS_25;
+NET ADC_2_D_N(*)                  IOSTANDARD = LVDS_25;
+NET ADC_2_CK_P                    LOC = AK11;
+NET ADC_2_CK_N                    LOC = AJ11;
+NET ADC_2_D_P(0)                  LOC = AF11;
+NET ADC_2_D_P(1)                  LOC = AC25;
+NET ADC_2_D_P(2)                  LOC = AE13;
+NET ADC_2_D_P(3)                  LOC = AD24;
+NET ADC_2_D_P(4)                  LOC = AE14;
+NET ADC_2_D_P(5)                  LOC = AF23;
+NET ADC_2_D_P(6)                  LOC = AF13;
+NET ADC_2_D_P(7)                  LOC = AF24;
+NET ADC_2_D_P(8)                  LOC = AF15;
+NET ADC_2_D_P(9)                  LOC = AE21;
+NET ADC_2_D_P(10)                 LOC = AF16;
+NET ADC_2_D_P(11)                 LOC = AE22;
+NET ADC_2_D_P(12)                 LOC = AF18;
+NET ADC_2_D_P(13)                 LOC = AE19;
+NET ADC_2_D_P(14)                 LOC = AG18;
+NET ADC_2_D_P(15)                 LOC = AF20;
+NET ADC_2_D_N(0)                  LOC = AE11;
+NET ADC_2_D_N(1)                  LOC = AC24;
+NET ADC_2_D_N(2)                  LOC = AE12;
+NET ADC_2_D_N(3)                  LOC = AE24;
+NET ADC_2_D_N(4)                  LOC = AF14;
+NET ADC_2_D_N(5)                  LOC = AG23;
+NET ADC_2_D_N(6)                  LOC = AG12;
+NET ADC_2_D_N(7)                  LOC = AG25;
+NET ADC_2_D_N(8)                  LOC = AE16;
+NET ADC_2_D_N(9)                  LOC = AD20;
+NET ADC_2_D_N(10)                 LOC = AE17;
+NET ADC_2_D_N(11)                 LOC = AE23;
+NET ADC_2_D_N(12)                 LOC = AE18;
+NET ADC_2_D_N(13)                 LOC = AD19;
+NET ADC_2_D_N(14)                 LOC = AF19;
+NET ADC_2_D_N(15)                 LOC = AF21;
+
+NET ADC_3_CK_P                    IOSTANDARD = LVDS_25;
+NET ADC_3_CK_N                    IOSTANDARD = LVDS_25;
+NET ADC_3_D_P(*)                  IOSTANDARD = LVDS_25;
+NET ADC_3_D_N(*)                  IOSTANDARD = LVDS_25;
+NET ADC_3_CK_P                    LOC = AK28;
+NET ADC_3_CK_N                    LOC = AK27;
+NET ADC_3_D_P(0)                  LOC = V25;
+NET ADC_3_D_P(1)                  LOC = Y27;
+NET ADC_3_D_P(2)                  LOC = W24;
+NET ADC_3_D_P(3)                  LOC = Y26;
+NET ADC_3_D_P(4)                  LOC = AA25;
+NET ADC_3_D_P(5)                  LOC = AB25;
+NET ADC_3_D_P(6)                  LOC = Y24;
+NET ADC_3_D_P(7)                  LOC = AB27;
+NET ADC_3_D_P(8)                  LOC = AF25;
+NET ADC_3_D_P(9)                  LOC = AE27;
+NET ADC_3_D_P(10)                 LOC = AD26;
+NET ADC_3_D_P(11)                 LOC = AC28;
+NET ADC_3_D_P(12)                 LOC = AG27;
+NET ADC_3_D_P(13)                 LOC = AH27;
+NET ADC_3_D_P(14)                 LOC = AJ25;
+NET ADC_3_D_P(15)                 LOC = AK26;
+NET ADC_3_D_N(0)                  LOC = W25;
+NET ADC_3_D_N(1)                  LOC = W27;
+NET ADC_3_D_N(2)                  LOC = V24;
+NET ADC_3_D_N(3)                  LOC = W26;
+NET ADC_3_D_N(4)                  LOC = AA26;
+NET ADC_3_D_N(5)                  LOC = AB26;
+NET ADC_3_D_N(6)                  LOC = AA24;
+NET ADC_3_D_N(7)                  LOC = AC27;
+NET ADC_3_D_N(8)                  LOC = AF26;
+NET ADC_3_D_N(9)                  LOC = AE26;
+NET ADC_3_D_N(10)                 LOC = AD25;
+NET ADC_3_D_N(11)                 LOC = AD27;
+NET ADC_3_D_N(12)                 LOC = AG26;
+NET ADC_3_D_N(13)                 LOC = AJ26;
+NET ADC_3_D_N(14)                 LOC = AH25;
+NET ADC_3_D_N(15)                 LOC = AJ27;
+
+NET ADC_4_CK_P                    IOSTANDARD = LVDS_25;
+NET ADC_4_CK_N                    IOSTANDARD = LVDS_25;
+NET ADC_4_D_P(*)                  IOSTANDARD = LVDS_25;
+NET ADC_4_D_N(*)                  IOSTANDARD = LVDS_25;
+NET ADC_4_CK_P                    LOC = AK29;
+NET ADC_4_CK_N                    LOC = AJ29;
+NET ADC_4_D_P(0)                  LOC = Y28;
+NET ADC_4_D_P(1)                  LOC = W29;
+NET ADC_4_D_P(2)                  LOC = V28;
+NET ADC_4_D_P(3)                  LOC = V30;
+NET ADC_4_D_P(4)                  LOC = AB30;
+NET ADC_4_D_P(5)                  LOC = AA29;
+NET ADC_4_D_P(6)                  LOC = AB28;
+NET ADC_4_D_P(7)                  LOC = AD30;
+NET ADC_4_D_P(8)                  LOC = AF29;
+NET ADC_4_D_P(9)                  LOC = AE29;
+NET ADC_4_D_P(10)                 LOC = AE28;
+NET ADC_4_D_P(11)                 LOC = AF31;
+NET ADC_4_D_P(12)                 LOC = AG28;
+NET ADC_4_D_P(13)                 LOC = AJ30;
+NET ADC_4_D_P(14)                 LOC = AH29;
+NET ADC_4_D_P(15)                 LOC = AJ31;
+NET ADC_4_D_N(0)                  LOC = Y29;
+NET ADC_4_D_N(1)                  LOC = V29;
+NET ADC_4_D_N(2)                  LOC = V27;
+NET ADC_4_D_N(3)                  LOC = W30;
+NET ADC_4_D_N(4)                  LOC = AC30;
+NET ADC_4_D_N(5)                  LOC = AA30;
+NET ADC_4_D_N(6)                  LOC = AA28;
+NET ADC_4_D_N(7)                  LOC = AC29;
+NET ADC_4_D_N(8)                  LOC = AF30;
+NET ADC_4_D_N(9)                  LOC = AD29;
+NET ADC_4_D_N(10)                 LOC = AF28;
+NET ADC_4_D_N(11)                 LOC = AG31;
+NET ADC_4_D_N(12)                 LOC = AH28;
+NET ADC_4_D_N(13)                 LOC = AH30;
+NET ADC_4_D_N(14)                 LOC = AG30;
+NET ADC_4_D_N(15)                 LOC = AK31;
+
+NET ADC_5_CK_P                    IOSTANDARD = LVDS_25;
+NET ADC_5_CK_N                    IOSTANDARD = LVDS_25;
+NET ADC_5_D_P(*)                  IOSTANDARD = LVDS_25;
+NET ADC_5_D_N(*)                  IOSTANDARD = LVDS_25;
+NET ADC_5_CK_P                    LOC = AH34;
+NET ADC_5_CK_N                    LOC = AJ34;
+NET ADC_5_D_P(0)                  LOC = Y32;
+NET ADC_5_D_P(1)                  LOC = W34;
+NET ADC_5_D_P(2)                  LOC = W31;
+NET ADC_5_D_P(3)                  LOC = V32;
+NET ADC_5_D_P(4)                  LOC = AC32;
+NET ADC_5_D_P(5)                  LOC = AA34;
+NET ADC_5_D_P(6)                  LOC = AB31;
+NET ADC_5_D_P(7)                  LOC = Y33;
+NET ADC_5_D_P(8)                  LOC = AD32;
+NET ADC_5_D_P(9)                  LOC = AC33;
+NET ADC_5_D_P(10)                 LOC = AD31;
+NET ADC_5_D_P(11)                 LOC = AC34;
+NET ADC_5_D_P(12)                 LOC = AG33;
+NET ADC_5_D_P(13)                 LOC = AF34;
+NET ADC_5_D_P(14)                 LOC = AG32;
+NET ADC_5_D_P(15)                 LOC = AF33;
+NET ADC_5_D_N(0)                  LOC = W32;
+NET ADC_5_D_N(1)                  LOC = V34;
+NET ADC_5_D_N(2)                  LOC = Y31;
+NET ADC_5_D_N(3)                  LOC = V33;
+NET ADC_5_D_N(4)                  LOC = AB32;
+NET ADC_5_D_N(5)                  LOC = Y34;
+NET ADC_5_D_N(6)                  LOC = AA31;
+NET ADC_5_D_N(7)                  LOC = AA33;
+NET ADC_5_D_N(8)                  LOC = AE32;
+NET ADC_5_D_N(9)                  LOC = AB33;
+NET ADC_5_D_N(10)                 LOC = AE31;
+NET ADC_5_D_N(11)                 LOC = AD34;
+NET ADC_5_D_N(12)                 LOC = AH33;
+NET ADC_5_D_N(13)                 LOC = AE34;
+NET ADC_5_D_N(14)                 LOC = AH32;
+NET ADC_5_D_N(15)                 LOC = AE33;
+
+
+############################################################################
+## EEPROM interface
+############################################################################
+NET BPM_EEPROM_WP                 IOSTANDARD = LVCMOS18 | DRIVE = 8;
+NET BPM_EEPROM_SCL                IOSTANDARD = LVCMOS18 | DRIVE = 8;
+NET BPM_EEPROM_SDA                IOSTANDARD = LVCMOS18 | DRIVE = 8;
+NET BPM_EEPROM_WP                 LOC = G12;
+NET BPM_EEPROM_SCL                LOC = E13;
+NET BPM_EEPROM_SDA                LOC = E12;
+############################################################################
+## MGT clock interface
+############################################################################
+NET CLK_BPM_125_MGT_18_P TNM_NET = CLK_BPM_125_MGT_18_P;
+TIMESPEC TS_CLK_BPM_125_MGT_18_P = PERIOD CLK_BPM_125_MGT_18_P 8 ns HIGH 50 %;
+NET CLK_BPM_125_MGT_18_P          LOC = AL5;
+NET CLK_BPM_125_MGT_18_N          LOC = AL4;
+#NET CLK_BPM_125_MGT_18_P          LOC = AF4; ML84 corrected (dangling clock)
+#NET CLK_BPM_125_MGT_18_N          LOC = AF3;
+
+NET CLK_BPM_125_MGT_9F_P TNM_NET = CLK_BPM_125_MGT_9F_P;
+TIMESPEC TS_CLK_BPM_125_MGT_9F_P = PERIOD CLK_BPM_125_MGT_9F_P 8 ns HIGH 50 %;
+NET CLK_BPM_125_MGT_9F_P          LOC = H4;
+NET CLK_BPM_125_MGT_9F_N          LOC = H3;
+
+NET CLK_BPM_150_MGT_P TNM_NET = CLK_BPM_150_MGT_P;
+TIMESPEC TS_CLK_BPM_150_MGT_P = PERIOD CLK_BPM_150_MGT_P 6.6 ns HIGH 50 %;
+NET CLK_BPM_150_MGT_P             LOC = Y4;
+NET CLK_BPM_150_MGT_N             LOC = Y3;
+############################################################################
+## BPM FPGA to SYS FPGA interface
+############################################################################
+NET SYS_BPM_1MGT_P                LOC = G1;
+NET SYS_BPM_1MGT_N                LOC = H1;
+NET BPM_SYS_1MGT_P                LOC = F2;
+NET BPM_SYS_1MGT_N                LOC = G2;
+############################################################################
+## SYS FPGA to BPM FPGA trigger interface
+############################################################################
+NET ADC_TRIG_SYS_P                IOSTANDARD = LVDS_25;
+NET ADC_TRIG_SYS_N                IOSTANDARD = LVDS_25;
+NET ADC_TRIG_SYS_P                LOC = K23;                               # SYS_5LVDS_0_P trigger of embedded event receiver
+NET ADC_TRIG_SYS_N                LOC = K22;                               # SYS_5LVDS_0_N trigger of embedded event receiver
+############################################################################
+## BPM FPGA to BPM FPGA interface
+############################################################################
+NET BPM2_BPM1_1MGT_P              LOC = K1;
+NET BPM2_BPM1_1MGT_N              LOC = J1;
+NET BPM1_BPM2_1MGT_P              LOC = L2;
+NET BPM1_BPM2_1MGT_N              LOC = K2;
+############################################################################
+## BPM FPGA to VME P0 interface (watch it: channel 0/1 names are swapped)
+############################################################################
+NET P0_2MGT_RX1_P                 LOC = D1;
+NET P0_2MGT_RX1_N                 LOC = C1;
+NET P0_2MGT_TX1_P                 LOC = E2;
+NET P0_2MGT_TX1_N                 LOC = D2;
+NET P0_2MGT_RX0_P                 LOC = A3;
+NET P0_2MGT_RX0_N                 LOC = A2;
+NET P0_2MGT_TX0_P                 LOC = B4;
+NET P0_2MGT_TX0_N                 LOC = B3;
+############################################################################
+## BPM FPGA to BPM FPGA 4MGT
+############################################################################
+NET BPM_BPM_RX_MGT0_P             LOC = A9;
+NET BPM_BPM_RX_MGT1_P             LOC = A6;
+#NET BPM_BPM_RX_MGT2_P             LOC = AP6;
+#NET BPM_BPM_RX_MGT3_P             LOC = AP9;
+NET BPM_BPM_RX_MGT0_N             LOC = A8;
+NET BPM_BPM_RX_MGT1_N             LOC = A7;
+#NET BPM_BPM_RX_MGT2_N             LOC = AP7;
+#NET BPM_BPM_RX_MGT3_N             LOC = AP8;
+NET BPM_BPM_TX_MGT0_P             LOC = B10;
+NET BPM_BPM_TX_MGT1_P             LOC = B5;
+#NET BPM_BPM_TX_MGT2_P             LOC = AN5;
+#NET BPM_BPM_TX_MGT3_P             LOC = AN10;
+NET BPM_BPM_TX_MGT0_N             LOC = B9;
+NET BPM_BPM_TX_MGT1_N             LOC = B6;
+#NET BPM_BPM_TX_MGT2_N             LOC = AN6;
+#NET BPM_BPM_TX_MGT3_N             LOC = AN9;
+############################################################################
+## BPM FPGA to BP FPGA I2C interface
+############################################################################
+NET BP_BPM_I2C_SCL                IOSTANDARD = LVCMOS25 | PULLUP;
+NET BPM_BP_I2C_SCL                IOSTANDARD = LVCMOS25 | SLEW = FAST;
+NET BP_BPM_I2C_SDA                IOSTANDARD = LVCMOS25 | PULLUP;
+NET BPM_BP_I2C_SDA                IOSTANDARD = LVCMOS25 | SLEW = FAST;
+NET BP_BPM_I2C_SCL                LOC = J14;
+NET BPM_BP_I2C_SCL                LOC = H13;
+NET BP_BPM_I2C_SDA                LOC = K13;
+NET BPM_BP_I2C_SDA                LOC = K12;
+############################################################################
+## BPM FPGA to BP FPGA MPS interface
+############################################################################
+NET BPM_BP_MSP_B                  IOSTANDARD = LVCMOS25 | SLEW = FAST;
+NET BPM_BP_MSP_B                  LOC = J12;
+############################################################################
+## PIGGYBACK MGTs
+############################################################################
+#NET PB_BPM_0_P                  LOC = N1;                         #        - PB_8MGT_RX.P(0)
+#NET PB_BPM_0_N                  LOC = P1;                         #        - PB_8MGT_RX.N(0)
+#NET BPM_PB_0_P                  LOC = M2;                         #        - PB_8MGT_TX.P(0)
+#NET BPM_PB_0_N                  LOC = N2;                         #        - PB_8MGT_TX.N(0)
+#NET PB_BPM_1_P                  LOC = AE1;                        #        - PB_8MGT_RX.P(1)
+#NET PB_BPM_1_N                  LOC = AF1;                        #        - PB_8MGT_RX.N(1)
+#NET BPM_PB_1_P                  LOC = AD2;                        #        - PB_8MGT_TX.P(1)
+#NET BPM_PB_1_N                  LOC = AE2;                        #        - PB_8MGT_TX.N(1)
+#NET PB_BPM_2_P                  LOC = T1;                         #        - PB_8MGT_RX.P(2)
+#NET PB_BPM_2_N                  LOC = R1;                         #        - PB_8MGT_RX.N(2)
+#NET BPM_PB_2_P                  LOC = U2;                         #        - PB_8MGT_TX.P(2)
+#NET BPM_PB_2_N                  LOC = T2;                         #        - PB_8MGT_TX.N(2)
+#NET PB_BPM_3_P                  LOC = AH1;                        #        - PB_8MGT_RX.P(3)
+#NET PB_BPM_3_N                  LOC = AG1;                        #        - PB_8MGT_RX.N(3)
+#NET BPM_PB_3_P                  LOC = AJ2;                        #        - PB_8MGT_TX.P(3)
+#NET BPM_PB_3_N                  LOC = AH2;                        #        - PB_8MGT_TX.N(3)
+#NET PB_BPM_4_P                LOC = W1;                         # J1-F2  - PB_8MGT_RX.P(4)
+#NET PB_BPM_4_N                LOC = Y1;                         # J1-F3  - PB_8MGT_RX.N(4)
+#NET BPM_PB_4_P                LOC = V2;                         # J1-G5  - PB_8MGT_TX.P(4)
+#NET BPM_PB_4_N                LOC = W2;                         # J1-G6  - PB_8MGT_TX.N(4)
+#NET PB_BPM_5_P                LOC = AL1;                        # 122.rx0
+#NET PB_BPM_5_N                LOC = AM1;                        # 122.rx0
+#NET BPM_PB_5_P                LOC = AK2;                        # 122.tx0
+#NET BPM_PB_5_N                LOC = AL2;                        # 122.tx0
+#NET PB_BPM_6_P                LOC = AB1;                        # J1-H2  - PB_8MGT_RX.P(6)
+#NET PB_BPM_6_N                LOC = AA1;                        # J1-H3  - PB_8MGT_RX.N(6)
+#NET BPM_PB_6_P                LOC = AC2;                        # J1-J5  - PB_8MGT_TX.P(6)
+#NET BPM_PB_6_N                LOC = AB2;                        # J1-J6  - PB_8MGT_TX.N(6)
+#NET PB_BPM_7_P                LOC = AP3;                        # 122.rx1
+#NET PB_BPM_7_N                LOC = AP2;                        # 122.rx1
+#NET BPM_PB_7_P                LOC = AN4;                        # 122.tx1
+#NET BPM_PB_7_N                LOC = AN3;                        # 122.tx1
+############################################################################
+## End of File
+############################################################################

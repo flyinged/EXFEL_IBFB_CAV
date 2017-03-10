@@ -1,0 +1,10 @@
+##############################################################################
+## Filename:          ./sys_init_v2_1_0.pao
+## Description:       Peripheral Analysis Order
+## Date:              Wed Aug 22 16:59:06 2012 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+lib proc_common_v3_00_a  all 
+lib plbv46_slave_burst_v1_01_a  all 
+lib sys_init_v1_00_a user_logic vhdl
+lib sys_init_v1_00_a sys_init vhdl

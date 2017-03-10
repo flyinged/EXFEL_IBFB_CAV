@@ -1,0 +1,2 @@
+FILES
+divider_32_20.ngc, divider_18_18.ngc, fifo_16bit_32samples.ngc, conv_int18_single.ngc, single_add.ngc, single_sub.ngc, single_mult.ngc, single_div.ngc, single_greater.ngc, single_less.ngc

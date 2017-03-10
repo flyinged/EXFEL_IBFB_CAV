@@ -1,0 +1,21 @@
+##############################################################################
+## Filename:          bpm_cav_exfel_v2_1_0.pao
+## Description:       Peripheral Analysis Order
+## Date:              Fri Oct 12 10:55:03 2012 (by Create and Import Peripheral Wizard)
+##############################################################################
+
+lib proc_common_v3_00_a  all 
+lib plbv46_slave_burst_v1_01_a  all 
+lib bpm_cav_exfel_v1_00_a fpga_technology_package_virtex5 vhdl
+lib bpm_cav_exfel_v1_00_a adc_hck vhdl
+lib bpm_cav_exfel_v1_00_a adc_smp_type vhdl
+lib bpm_cav_exfel_v1_00_a adc_smp_fsm vhdl
+lib bpm_cav_exfel_v1_00_a adc_smp_data_adjust vhdl
+lib bpm_cav_exfel_v1_00_a adc_smp_baseline vhdl
+lib bpm_cav_exfel_v1_00_a bpm_cav_calc vhdl
+lib bpm_cav_exfel_v1_00_a adc_smp_buffer vhdl
+lib bpm_cav_exfel_v1_00_a adc_smp_bram vhdl
+lib bpm_cav_exfel_v1_00_a adc_smp_mps vhdl
+lib bpm_cav_exfel_v1_00_a adc_smp vhdl
+lib bpm_cav_exfel_v1_00_a user_logic vhdl
+lib bpm_cav_exfel_v1_00_a bpm_cav_exfel vhdl
